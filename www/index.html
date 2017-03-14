@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/framework7.material.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+
+    <title>Fact</title>
+
+
+</head>
+
+<body class="theme-violet">
+    <input type="hidden" id="days" name="days" value="180">
+    <input type="hidden" id="seconds" name="seconds" value="60">
+    <input type="hidden" id="minutes" name="minutes" value="20">
+    <input type="hidden" id="hours" name="hours" value="8">
+    <input type="hidden" id="lock" name="lock" value="0">
+    <input type="hidden" id="allchecked" name="allchecked" value="0">
+<!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay" data-userid=""></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+      <div class="list-block" style="margin:0px !important;" >
+              <div id="profile_container" style="padding: 30px;color: #fff;background: #03a9f4;background-image: url('img/blurr.jpg');">
+                  <div class="chip" style="color:#fff !important;">
+                      <div class="chip-media"><img id="profile_image" src="http://zeeuwsbyzantijnskoor.nl/wp-content/uploads/2016/11/no-foto-ladie.jpg" class=""></div>
+                      <div class="chip-label" id="profile_name"></div>
+                  </div>
+              </div>
+                <ul>
+                  <li><a href="home.html" class="item-link close-panel">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title"><img src="img/home.png" alt=""> Home</div>
+                        </div>
+                      </div></a>
+                  </li>
+
+                  <li><a href="about.html" class="item-link close-panel">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">  <div class="item-title"><img src="img/info (1).png" alt="">  About</div>
+                        </div>
+                      </div></a>
+                  </li>
+
+
+                    <li><a href="location.html" class="item-link close-panel">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">  <div class="item-title"><img src="img/placeholder.png" alt=""> Location </div>
+                        </div>
+                      </div></a>
+                  </li>
+
+                  <li><a href="disclaimer.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">  <div class="item-title"><img src="img/info.png" alt=""> Disclaimer</div>
+                        </div>
+                      </div></a>
+                  </li>
+
+                   <li><a href="#" class="signout close-panel">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">  <div class="item-title"><img src="img/logout.png" alt=""> Sign Out</div>
+                        </div>
+                      </div></a>
+                  </li>
+
+
+
+                </ul>
+      </div>
+    </div>
+
+    <!-- Views-->
+    <div class="views">
+        <div class="view view-main">
+
+            <div class="pages">
+                <div class="navbar">
+                  <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding logo-main"><center>Facts</center></div>
+                    <div class="center sliding schools-logo"><center><img src="img/school-logo.png"  style="width:50px;top: 9px;position: relative;right: 5px;"><span style="bottom:5px;position: relative;">SCHOOLS</span></center></div>
+
+                    <div class="center sliding instructions-logo"><center><img src="img/instructions-logo.png"  style="width:50px;top: 9px;position: relative;right: 5px;"><span style="bottom:5px;position: relative;">Instructions</span></center></div>
+
+                    <div class="center sliding personality-logo"><center><img src="img/assessment-logo.png"  style="width:50px;top: 9px;position: relative;right: 5px;"><span style="bottom:5px;position: relative;">Personality Test</span></center></div>
+
+                    <div class="center sliding aptitude-logo"><center><img src="img/assessment-logo.png"  style="width:50px;top: 9px;position: relative;right: 5px;"><span style="bottom:5px;position: relative;">Aptitude Test</span></center></div>
+
+
+                    <div class="center sliding results-logo"><center><img src="img/result-logo.png"  style="width:50px;top: 9px;position: relative;right: 5px;"><span style="bottom:5px;position: relative;">Results</span></center></div>
+
+                    <div class="center sliding home-logo"><center><img src="img/home-logo.png"  style="width:50px;top: 9px;position: relative;"><span style="bottom:5px;position: relative;">Home</span></center></div>
+
+                    <div class="center sliding explore-logo"><center><img src="img/explore-logo.png"  style="width:50px;top: 9px;position: relative;"><span style="bottom:5px;position: relative;">Explore</span></center></div>
+
+                    <div class="center sliding achievements-logo"><center><img src="img/achievement.png"  style="width:50px;top: 9px;position: relative;"><span style="bottom:5px;position: relative;">Achievements</span></center></div>
+
+                     <div class="center sliding howto-logo"><center><img src="img/howto.png"  style="width:50px;top: 9px;position: relative;"><span style="bottom:5px;position: relative;">HOW TO</span></center></div>
+
+                     <div class="center sliding inpirational-logo"><center><img src="img/inspirational.png"  style="width:50px;top: 9px;position: relative;"><span style="bottom:5px;position: relative;">Inspirational  Quote</span></center></div>
+
+                      
+
+                        
+
+
+                    
+                    <div class="right hideonlogin"><a href="#" class="open-panel link icon-only hideonlogin" style="height:0px !important;"><img class="hideonlogin" src="img/menu.png" alt=""></a></div>
+
+                   
+
+                  </div>
+                </div>
+
+                <div class="page navbar-fixed" style="background: #5e69ff;">
+                                 <img src="img/head.png" style="width:100%;"> 
+                        <div class="page-content" style="background: #33ccff;padding-top:0px !important;">
+                             
+                              <div class="content-block">
+
+
+                                <img src="img/logo_header.jpg" style="width:100%;">
+                                    <center><h3>Sign in to FACTS</h3></center>
+      <!--                           
+                                      <p class="buttons-row">
+                                            <a href="login-screen-page.html" class="open-login-screen button button-big button-fill button-raised color-red">Login</a>
+                                      </p>
+                                      <p class="buttons-row">
+                                            <a href="register-screen.html" class="open-login-screen button button-big button-fill button-raised color-teal">Register</a>
+                                      </p> 
+                                 -->
+
+                                <hr>
+                                <p class="buttons-row">
+                                <button class="button button-big button-fill button-raised color-blue" style="background:#224385 !important;" onclick="login()">
+                                  <img src="img/fb.png" style="height: 25px;width:25px;position: relative;top:8px;right:10px;"> Login with Facebook</button>
+                                </p>
+                                <p class="buttons-row">
+
+                                 <button class="button button-big button-fill button-raised color-red" onclick="callGoogle()"> <img src="img/g.png" style="height: 25px;width:25px;position: relative;top:8px;right:10px;"> Login with Google</button>
+                                    
+                                </p>
+
+                                <p class="buttons-row">
+                                  <button class="button button-big button-fill button-raised" style="background:#0098e6 !important;" onclick="twitterlogin()">
+                                  <img src="img/t.png" style="height: 25px;width:25px;position: relative;top:8px;right:10px;"> Login with Twitter</button>
+                                </p>
+
+                            </div>
+                       </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+<!--     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAuxRYIk0OxiZHkM79BxconQMkiVZ0Ueoo",
+        authDomain: "faact-7d8fc.firebaseapp.com",
+        databaseURL: "https://faact-7d8fc.firebaseio.com",
+        storageBucket: "faact-7d8fc.appspot.com",
+        messagingSenderId: "405325414178"
+      };
+      firebase.initializeApp(config);
+    </script> -->
+
+<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCO-2QXDFrbcdihhufOSAcXnPORdEhqcLM",
+    authDomain: "facts-faab4.firebaseapp.com",
+    databaseURL: "https://facts-faab4.firebaseio.com",
+    storageBucket: "facts-faab4.appspot.com",
+    messagingSenderId: "765087967289"
+  };
+  firebase.initializeApp(config);
+</script>   
+    
+    <script src="openfb.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/fb.js"></script>
+    <script type="text/javascript" src="js/twitter.js"></script>
+    <script type="text/javascript" src="js/google.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXlobVr4rf4zJKBqwj7RCaJYImyEW7eOs&libraries=places"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/achievements.js"></script>
+    <script type="text/javascript" src="js/timer.js"></script>
+     <script type="text/javascript">
+        app.initialize();
+    </script>
+
+</body>
+
+</html>

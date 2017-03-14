@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-packageName="com.facts.android" id="com.phonegap.helloworld" ios-CFBundleIdentifier="com.facts.ios" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="Camera">
+        <param name="browser-package" value="Camera" />
+    </feature>
+    <feature name="Device">
+        <param name="browser-package" value="Device" />
+    </feature>
+    <name>Facts</name>
+    <description>Facts</description>
+    <author email="support@phonegap.com" href="http://phonegap.com">Facts</author>
+    <content src="index.html" />
+    <icon src="icon.png" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <gap:plugin name="twitter-connect-plugin" source="npm" spec="0.5.0">
+        <param name="FABRIC_KEY" value="ebd060736c20745e392ac52804bcc35882d4ae6e" />
+    </gap:plugin>
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="TwitterConsumerKey" value="Y0gcuxldehAtiBjO6apEIDuzb" />
+    <preference name="TwitterConsumerSecret" value="f5FsTPkjgng44N3p3fXXX71P6ZEhora08urNvFVXGFNbqJmOJY" />
+</widget>
